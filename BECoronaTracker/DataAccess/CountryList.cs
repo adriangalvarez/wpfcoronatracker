@@ -8,9 +8,9 @@ using System.Text;
 
 namespace BECoronaTracker.DataAccess
 {
-    public class CountryList
+    internal class CountryList
     {
-        public static BindableCollection<Country> LoadCountryList()
+        internal static BindableCollection<Country> LoadCountryList()
         {
             BindableCollection<Country> countries = new BindableCollection<Country>();
             string line = string.Empty;

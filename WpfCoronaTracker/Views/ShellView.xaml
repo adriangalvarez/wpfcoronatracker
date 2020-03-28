@@ -34,6 +34,11 @@
             <RowDefinition Height="60" />
             <RowDefinition Height="30" />
             <RowDefinition Height="40"  />
+            <RowDefinition Height="40"  />
+            <RowDefinition Height="40"  />
+            <RowDefinition Height="40"  />
+            <RowDefinition Height="40"  />
+            <RowDefinition Height="40"  />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
@@ -95,5 +100,88 @@
         <TextBlock Grid.Row="3" Grid.Column="2"
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    Text="{Binding Path=SelectedCountry.Code, Mode=OneWay}" />
+        
+        <!-- Row 4 -->
+        <StackPanel x:Name="TotalCasesTitleIsVisible"
+                    Grid.Row="4" Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Right">
+                Total cases:
+            </TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="TotalCasesIsVisible"
+                    Grid.Row="4" Grid.Column="2"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="TotalCases"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Row 5 -->
+        <StackPanel x:Name="TotalRecoveredTitleIsVisible"
+                    Grid.Row="5" Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Right">
+                Total Recovered:
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Name="TotalRecoveredIsVisible"
+                    Grid.Row="5" Grid.Column="2"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="TotalRecovered"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Row 6 -->
+        <StackPanel x:Name="TotalDeathsTitleIsVisible"
+                    Grid.Row="6" Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Right">
+                Total Deaths:
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Name="TotalDeathsIsVisible"
+                    Grid.Row="6" Grid.Column="2"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="TotalDeaths"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Row 7 -->
+        <StackPanel x:Name="DayOneTitleIsVisible"
+                    Grid.Row="7" Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Right">
+                Day 1:
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Name="DayOneIsVisible"
+                    Grid.Row="7" Grid.Column="2"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="DayOne"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Row 8 -->
+        <StackPanel x:Name="CurrentDayTitleIsVisible"
+                    Grid.Row="8" Grid.Column="1"
+                    VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Right">
+                Current Day:
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Name="CurrentDayIsVisible"
+                    Grid.Row="8" Grid.Column="2"
+                    VerticalAlignment="Center">
+            <TextBlock x:Name="CurrentDay"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+        
+        <!-- Inner Window Row 3 -->
+        <ContentControl Grid.Row="3" Grid.Column="3" Grid.RowSpan="7"
+                        x:Name="ActiveItem" />
     </Grid>
 </Window>

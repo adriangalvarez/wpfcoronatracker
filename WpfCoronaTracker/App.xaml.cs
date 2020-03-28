@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfCoronaTracker.Views;
 
 namespace WpfCoronaTracker
 {
@@ -18,7 +19,7 @@ namespace WpfCoronaTracker
         {
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo( "es-AR" );
 
-            MainWindow window = new MainWindow();
+            ShellView window = new ShellView();
             if ( e.Args.Length == 1 )
             {
                 window.Title = $"{e.Args[ 0 ]}";
