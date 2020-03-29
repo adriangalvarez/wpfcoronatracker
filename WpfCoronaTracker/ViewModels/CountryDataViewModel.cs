@@ -4,25 +4,19 @@ using LiveCharts;
 using LiveCharts.Configurations;
 using LiveCharts.Helpers;
 using System.ComponentModel;
+using System;
 
 namespace WpfCoronaTracker.ViewModels
 {
-    public class CountryDataViewModel : Conductor<object>, INotifyPropertyChanged
+    public class CountryDataViewModel : Conductor<object>
     {
+        private double _from;
+        private double _to;
+        private bool _paginate;
+
         public ChartValues<State> Results { get; set; }
         public object Mapper { get; set; }
         public Country Country { get; set; }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged( string propertyName = null )
-        {
-            if ( PropertyChanged != null )
-                PropertyChanged.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
-        }
-
-        private double _from;
-
         public double From
         {
             get{ 
@@ -30,11 +24,10 @@ namespace WpfCoronaTracker.ViewModels
             }
             set { 
                 _from = value;
-                OnPropertyChanged( "From" );
+                NotifyOfPropertyChange( () => From );
+                NotifyOfPropertyChange( () => CanPrevious );
             }
         }
-
-        private double _to;
 
         public double To
         {
@@ -43,20 +36,48 @@ namespace WpfCoronaTracker.ViewModels
             }
             set { 
                 _to = value;
-                OnPropertyChanged( "To" );
+                NotifyOfPropertyChange( () => To );
+                NotifyOfPropertyChange( () => CanNext );
             }
         }
 
+        public bool Paginate
+        {
+            get { return _paginate; }
+            set { 
+                _paginate = value;
+                ChangeXLimits( value );
 
+                NotifyOfPropertyChange( () => Paginate );
+                NotifyOfPropertyChange( () => From );
+                NotifyOfPropertyChange( () => To );
+                NotifyOfPropertyChange( () => CanPrevious );
+                NotifyOfPropertyChange( () => CanNext );
+            }
+        }
 
+        private void ChangeXLimits( bool value )
+        {
+            From = 1;
+
+            if ( value )
+            {
+                To = Country.CurrentDay > 20 ? 21 : Country.CurrentDay;
+            } else
+            {
+                To = Country.CurrentDay;
+            }
+        }
+
+        public bool CanPrevious { get => From > 1; }
+        public bool CanNext { get => To < Country.CurrentDay; }
 
         public CountryDataViewModel( Country country )
         {
             Country = country;
             BECoronaTracker.Controllers.CountryDataController.GetData( Country );
             DrawData();
-            From = 1;
-            To = Country.CurrentDay > 20 ? 20 : Country.CurrentDay;
+            Paginate = true;
         }
 
         private void DrawData()
@@ -74,7 +95,7 @@ namespace WpfCoronaTracker.ViewModels
             if ( From > 1 )
             {
                 From -= 20;
-                To -= 20;
+                To = From + 20;
             }
         }
 
@@ -83,7 +104,7 @@ namespace WpfCoronaTracker.ViewModels
             if ( To < Country.CurrentDay )
             {
                 From += 20;
-                To += 20;
+                To = To <= Country.CurrentDay - 20 ? From + 20 : Country.CurrentDay;
             }
         }
     }
