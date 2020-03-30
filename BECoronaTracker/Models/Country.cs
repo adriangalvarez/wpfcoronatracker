@@ -8,25 +8,31 @@ namespace BECoronaTracker.Models
     public class Country
     {
         /// <summary>
-        /// Country Code (two letters) used as parameter for querystring
+        /// Country Code (two letters) used as parameter for querystring.
         /// </summary>
         [DeserializeAs( Name = "alpha2Code" )]
         public string Code { get; set; }
 
         /// <summary>
-        /// Name of the country
+        /// Name of the country.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// List of updated data for each day
+        /// List of updated data for each day.
         /// </summary>
         public List<State> States { get; set; } = new List<State>();
 
         public int CurrentCases { get; set; }
         public int CurrentDeaths { get; set; }
         public int CurrentRecovered { get; set; }
+
+        /// <summary>
+        /// First day with a case.
+        /// </summary>
         public DateTime DayOne { get; set; }
+
+        // Number of days since the first day with a case.
         public int CurrentDay { get; set; }
 
         public int Population { get; set; }

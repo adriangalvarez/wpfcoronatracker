@@ -10,6 +10,10 @@ namespace BECoronaTracker.DataAccess
 {
     internal class CountryList
     {
+        /// <summary>
+        /// Get a list of all countries from API with name, population and ISO code.
+        /// </summary>
+        /// <returns>All countries with name, population and ISO code.</returns>
         internal static List<Country> GetAllCountries()
         {
             var client = new RestSharp.RestClient( "https://restcountries.eu/rest/v2/all" );

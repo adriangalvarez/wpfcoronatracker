@@ -8,6 +8,10 @@ namespace WpfCoronaTracker.ViewModels
     public class ShellViewModel : Conductor<object>
     {
         private Country _selectedCountry;
+
+        /// <summary>
+        /// List of all countries with data.
+        /// </summary>
         public List<Country> Countries { get; set; }
 
         public Country SelectedCountry
@@ -22,7 +26,10 @@ namespace WpfCoronaTracker.ViewModels
 
         public ShellViewModel()
         {
+            // Get a list of all countries.
             Countries = CountryListController.GetCountries();
+
+            // Fill data for each country.
             CountryDataModel.MatchData( CountryDataController.GetFullData(), Countries );
         }
 
