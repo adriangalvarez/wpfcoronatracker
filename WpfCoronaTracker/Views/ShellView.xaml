@@ -32,6 +32,7 @@
             <RowDefinition Height="45" />
             <RowDefinition Height="20" />
             <RowDefinition Height="200"  />
+            <RowDefinition Height="10" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
@@ -117,8 +118,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Inner Window Row 4 -->
-        <ContentControl Grid.Row="4" Grid.Column="1"
+        <!-- Inner Window Row 5 -->
+        <ContentControl Grid.Row="5" Grid.Column="1"
                         x:Name="ActiveItem" />
     </Grid>
 </Window>
