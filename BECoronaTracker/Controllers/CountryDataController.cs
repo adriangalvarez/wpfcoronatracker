@@ -5,20 +5,21 @@ namespace BECoronaTracker.Controllers
 {
     public static class CountryDataController
     {
-        public static EachDataModel[] countryTimeline;
+        public static EachDataModel[] CountryTimeline { get; set ; }
 
-        public static void GetFullData()
+        public static EachDataModel[] GetFullData()
         {
             AllDataModel result = Newtonsoft.Json.JsonConvert.DeserializeObject<AllDataModel>( DataAccess.CountryData.GetAllData() );
-            countryTimeline = result.data;
+            CountryTimeline = result.data;
+            return CountryTimeline;
         }
 
         public static void GetData( Country country )
         {
-            var result = from day in countryTimeline
-                    where day.countrycode == country.Code
-                        && day.cases > 0
-                    orderby day.date
+            var result = from day in CountryTimeline
+                    where day.Countrycode == country.Code
+                        && day.Cases > 0
+                    orderby day.Date
                     select day;
 
             var dayNumber = 0;
@@ -28,20 +29,14 @@ namespace BECoronaTracker.Controllers
                 country.States.Add(
                     new State
                     {
-                        DateOfState = day.date,
+                        DateOfState = day.Date,
                         DayNumber = ++dayNumber,
-                        TotalCases = day.cases,
-                        TotalDeaths = day.deaths,
-                        TotalRecoveries = day.recovered
+                        TotalCases = day.Cases,
+                        TotalDeaths = day.Deaths,
+                        TotalRecoveries = day.Recovered
                     }
                 );
             }
-
-            country.CurrentCases = country.States.Max( value => value.TotalCases );
-            country.CurrentDeaths = country.States.Max( value => value.TotalDeaths );
-            country.CurrentRecovered = country.States.Max( value => value.TotalRecoveries );
-            country.CurrentDay = dayNumber;
-            country.DayOne = System.DateTime.Now.AddDays( ( -1 ) * dayNumber );
         }
     }
 }

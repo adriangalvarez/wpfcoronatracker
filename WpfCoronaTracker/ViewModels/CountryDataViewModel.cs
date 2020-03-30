@@ -5,6 +5,7 @@ using LiveCharts.Configurations;
 using LiveCharts.Helpers;
 using System.ComponentModel;
 using System;
+using LiveCharts.Wpf;
 
 namespace WpfCoronaTracker.ViewModels
 {
@@ -59,18 +60,14 @@ namespace WpfCoronaTracker.ViewModels
         private void ChangeXLimits( bool value )
         {
             From = 1;
-
             if ( value )
-            {
-                To = Country.CurrentDay > 20 ? 21 : Country.CurrentDay;
-            } else
-            {
-                To = Country.CurrentDay;
-            }
+                To = Country.CurrentDay >= 20 ? 21 : Country.CurrentDay + 1;
+            else
+                To = Country.CurrentDay + 1;
         }
 
         public bool CanPrevious { get => From > 1; }
-        public bool CanNext { get => To < Country.CurrentDay; }
+        public bool CanNext { get => To < Country.CurrentDay + 1; }
 
         public CountryDataViewModel( Country country )
         {
@@ -101,10 +98,10 @@ namespace WpfCoronaTracker.ViewModels
 
         public void Next()
         {
-            if ( To < Country.CurrentDay )
+            if ( To < Country.CurrentDay + 1 )
             {
                 From += 20;
-                To = To <= Country.CurrentDay - 20 ? From + 20 : Country.CurrentDay;
+                To = To <= Country.CurrentDay - 20 ? From + 21 : Country.CurrentDay + 1;
             }
         }
     }

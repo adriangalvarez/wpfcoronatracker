@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:WpfCoronaTracker.Views"
         mc:Ignorable="d" FontSize="18"
         Foreground="White"
-        Title="CoronaVirus Evolution Comparison" Height="450" Width="800"
+        Title="CoronaVirus Evolution Comparison" Height="600" Width="800"
         Background="{DynamicResource MainBackground}"
         WindowStartupLocation="CenterScreen">
 
@@ -24,164 +24,101 @@
         <!-- Definitions -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="100" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="60" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="40"  />
-            <RowDefinition Height="40"  />
-            <RowDefinition Height="40"  />
-            <RowDefinition Height="40"  />
-            <RowDefinition Height="40"  />
-            <RowDefinition Height="40"  />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="200"  />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         
         <!-- Title -->
         <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
+                   VerticalAlignment="Top"
                    Grid.Column="1"
                    Grid.Row="1"
                    Grid.ColumnSpan="3"
-                   FontSize="40"
+                   FontSize="35"
                    FontWeight="Bold"
                    FontStyle="Normal"
                    TextDecorations="Underline"
                    Text="{StaticResource title}">
         </TextBlock>
         
-        <!-- Headings -->
-        <TextBlock Grid.Row="2"
-                   Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontWeight="Bold">
-            Country
-        </TextBlock>
-        <TextBlock Grid.Row="2"
-                   Grid.Column="2"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontWeight="Bold">
-            Abrev.
-        </TextBlock>
-        <TextBlock Grid.Row="2"
-                   Grid.Column="3"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontWeight="Bold">
-            Evolution
-        </TextBlock>
-        
-        <!-- Controls Row 3 -->
-        <ComboBox x:Name="Countries"
-                  Grid.Row="3"
-                  Grid.Column="1"
-                  HorizontalAlignment="Stretch"
-                  Height="35"
-                  SelectedItem="{Binding SelectedCountry, Mode=OneWayToSource}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="(" />
-                        <TextBlock Text="{Binding Code}" />
-                        <TextBlock Text=") " />
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <TextBlock Grid.Row="3" Grid.Column="2"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Text="{Binding Path=SelectedCountry.Code, Mode=OneWay}" />
-        
-        <!-- Row 4 -->
-        <StackPanel x:Name="TotalCasesTitleIsVisible"
-                    Grid.Row="4" Grid.Column="1"
-                    VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Right">
-                Total cases:
-            </TextBlock>
-        </StackPanel>
-        <StackPanel x:Name="TotalCasesIsVisible"
-                    Grid.Row="4" Grid.Column="2"
-                    VerticalAlignment="Center">
-            <TextBlock x:Name="TotalCases"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
+        <!-- Data Grid Row 3 -->
+        <DataGrid Grid.Row="3" Grid.Column="1"
+                  x:Name="Countries"
+                  CanUserAddRows="False"
+                  AlternatingRowBackground="DarkCyan"
+                  
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Country"
+                                    FontSize="12"
+                                    Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Population" 
+                                    FontSize="12"
+                                    Binding="{Binding Path=Population}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Cases"
+                                    FontSize="12"
+                                    Binding="{Binding Path=CurrentCases}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Recovered"
+                                    FontSize="12"
+                                    Binding="{Binding Path=CurrentRecovered}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Deaths"
+                                    FontSize="12"
+                                    Binding="{Binding Path=CurrentDeaths}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Day 1"
+                                    FontSize="12"
+                                    Binding="{Binding Path=DayOne, StringFormat={}{0:d}}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Current Day"
+                                    FontSize="12"
+                                    Binding="{Binding Path=CurrentDay}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <!-- Row 5 -->
-        <StackPanel x:Name="TotalRecoveredTitleIsVisible"
-                    Grid.Row="5" Grid.Column="1"
-                    VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Right">
-                Total Recovered:
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel x:Name="TotalRecoveredIsVisible"
-                    Grid.Row="5" Grid.Column="2"
-                    VerticalAlignment="Center">
-            <TextBlock x:Name="TotalRecovered"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <!-- Row 6 -->
-        <StackPanel x:Name="TotalDeathsTitleIsVisible"
-                    Grid.Row="6" Grid.Column="1"
-                    VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Right">
-                Total Deaths:
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel x:Name="TotalDeathsIsVisible"
-                    Grid.Row="6" Grid.Column="2"
-                    VerticalAlignment="Center">
-            <TextBlock x:Name="TotalDeaths"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <!-- Row 7 -->
-        <StackPanel x:Name="DayOneTitleIsVisible"
-                    Grid.Row="7" Grid.Column="1"
-                    VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Right">
-                Day 1:
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel x:Name="DayOneIsVisible"
-                    Grid.Row="7" Grid.Column="2"
-                    VerticalAlignment="Center">
-            <TextBlock x:Name="DayOne"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <!-- Row 8 -->
-        <StackPanel x:Name="CurrentDayTitleIsVisible"
-                    Grid.Row="8" Grid.Column="1"
-                    VerticalAlignment="Center">
-            <TextBlock HorizontalAlignment="Right">
-                Current Day:
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel x:Name="CurrentDayIsVisible"
-                    Grid.Row="8" Grid.Column="2"
-                    VerticalAlignment="Center">
-            <TextBlock x:Name="CurrentDay"
-                       HorizontalAlignment="Center" />
-        </StackPanel>
-        
-        <!-- Inner Window Row 3 -->
-        <ContentControl Grid.Row="3" Grid.Column="3" Grid.RowSpan="7"
+        <!-- Inner Window Row 4 -->
+        <ContentControl Grid.Row="4" Grid.Column="1"
                         x:Name="ActiveItem" />
     </Grid>
 </Window>

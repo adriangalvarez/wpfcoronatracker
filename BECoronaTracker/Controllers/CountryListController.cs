@@ -8,9 +8,9 @@ namespace BECoronaTracker.Controllers
 {
     public static class CountryListController
     {
-        public static BindableCollection<Country> LoadCountryList()
+        public static List<Country> GetCountries()
         {
-            return DataAccess.CountryList.LoadCountryList();
+            return DataAccess.CountryList.GetAllCountries();
         }
     }
 }

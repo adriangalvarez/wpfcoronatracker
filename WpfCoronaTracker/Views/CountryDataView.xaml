@@ -44,7 +44,7 @@
                     <local:CountryStateTooltipControl />
             </lvc:CartesianChart.DataTooltip>
             <lvc:CartesianChart.Series>
-                <lvc:ColumnSeries Values="{Binding Results}"
+                <lvc:LineSeries Values="{Binding Results}"
                                   Configuration="{Binding Mapper}"
                                   Fill="DarkCyan"/>
             </lvc:CartesianChart.Series>

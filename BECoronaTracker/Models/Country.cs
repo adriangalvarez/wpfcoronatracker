@@ -1,13 +1,16 @@
-﻿using System;
+﻿using RestSharp.Deserializers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BECoronaTracker.Models
 {
-    public class Country {
+    public class Country
+    {
         /// <summary>
         /// Country Code (two letters) used as parameter for querystring
         /// </summary>
+        [DeserializeAs( Name = "alpha2Code" )]
         public string Code { get; set; }
 
         /// <summary>
@@ -18,7 +21,7 @@ namespace BECoronaTracker.Models
         /// <summary>
         /// List of updated data for each day
         /// </summary>
-        public List<State> States { get; set; }
+        public List<State> States { get; set; } = new List<State>();
 
         public int CurrentCases { get; set; }
         public int CurrentDeaths { get; set; }
@@ -26,11 +29,11 @@ namespace BECoronaTracker.Models
         public DateTime DayOne { get; set; }
         public int CurrentDay { get; set; }
 
-        internal Country( string code, string name )
-        {
-            Code = code;
-            Name = name;
-            States = new List<State>();
-        }
+        public int Population { get; set; }
+
+        /// <summary>
+        /// Parameterless Constructor needed by RestSharp to get a list of countries from API
+        /// </summary>
+        public Country() { }
     }
 }

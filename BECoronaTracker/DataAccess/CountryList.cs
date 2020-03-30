@@ -10,34 +10,13 @@ namespace BECoronaTracker.DataAccess
 {
     internal class CountryList
     {
-        internal static BindableCollection<Country> LoadCountryList()
+        internal static List<Country> GetAllCountries()
         {
-            BindableCollection<Country> countries = new BindableCollection<Country>();
-            string line = string.Empty;
+            var client = new RestSharp.RestClient( "https://restcountries.eu/rest/v2/all" );
+            var allCountriesParam = new RestSharp.Parameter( "fields", "name;population;alpha2Code", RestSharp.ParameterType.QueryString );
+            var response = client.Execute<List<Country>>( new RestSharp.RestRequest().AddParameter( allCountriesParam ) );
 
-            try
-            {
-                string countryListFile = "files/CountryCodesForCorona.txt";
-                string rootPath = Path.GetDirectoryName( Assembly.GetExecutingAssembly().CodeBase );
-                string fullPath = Path.Combine( rootPath, countryListFile );
-                string filePath = new Uri( fullPath ).LocalPath;
-
-                using ( StreamReader reader = new StreamReader( new FileStream( filePath, FileMode.Open, FileAccess.Read ) ) )
-                {
-                    while ( ( line = reader.ReadLine() ) != null )
-                    {
-                        string[] infoCountry = line.Split( ':' );
-                        Country country = new Country( infoCountry[ 0 ], infoCountry[ 1 ] );
-                        countries.Add( country );
-                    }
-                }
-
-            } catch ( Exception ex )
-            {
-                throw ex;
-            }
-
-            return countries;
+            return response.Data;
         }
     }
 }
