@@ -84,7 +84,6 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ViewModels\CountryDataViewModel.cs" />
-    <Compile Include="ViewModels\CountryStateTooltipControlViewModel.cs" />
     <Compile Include="Views\CountryDataView.xaml.cs">
       <DependentUpon>CountryDataView.xaml</DependentUpon>
     </Compile>
