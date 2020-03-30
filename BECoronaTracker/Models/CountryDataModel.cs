@@ -5,7 +5,7 @@ namespace BECoronaTracker.Models
 {
     public static class CountryDataModel
     {
-        public static void MatchData( EachDataModel[] allData, List<Country> countries )
+        public static void MatchData( List<EachDataModel> allData, List<Country> countries )
         {
             List<Country> countriesWithoutData = new List<Country>();
 

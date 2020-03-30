@@ -1,16 +1,17 @@
 ﻿using BECoronaTracker.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BECoronaTracker.Controllers
 {
     public static class CountryDataController
     {
-        public static EachDataModel[] CountryTimeline { get; set ; }
+        public static List<EachDataModel> CountryTimeline { get; set ; }
 
-        public static EachDataModel[] GetFullData()
+        public static List<EachDataModel> GetFullData()
         {
-            AllDataModel result = Newtonsoft.Json.JsonConvert.DeserializeObject<AllDataModel>( DataAccess.CountryData.GetAllData() );
-            CountryTimeline = result.data;
+            AllDataModel result = DataAccess.CountryData.GetAllData();
+            CountryTimeline = result.Data;
             return CountryTimeline;
         }
 

@@ -6,14 +6,14 @@ namespace BECoronaTracker.DataAccess
     {
         internal static string fullDataUrl = "https://thevirustracker.com/timeline/map-data.json";
 
-        internal static string AllData { get; set; }
+        internal static AllDataModel AllData { get; set; }
 
-        internal static string GetAllData()
+        internal static AllDataModel GetAllData()
         {
-            if ( string.IsNullOrWhiteSpace(AllData) )
+            if ( AllData == null )
             {
                 var client = new RestSharp.RestClient( fullDataUrl );
-                AllData = client.Execute( new RestSharp.RestRequest( RestSharp.Method.GET ) ).Content;
+                AllData = client.Execute<AllDataModel>( new RestSharp.RestRequest( RestSharp.Method.GET ) ).Data;
             }
             return AllData;
         }

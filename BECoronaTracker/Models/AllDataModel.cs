@@ -6,6 +6,6 @@ namespace BECoronaTracker.Models
 {
     public class AllDataModel
     {
-        public EachDataModel[] data;
+        public List<EachDataModel> Data { get; set; }
     }
 }
