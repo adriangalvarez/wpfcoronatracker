@@ -53,8 +53,6 @@
         <!-- Data Grid Row 3 -->
         <DataGrid Grid.Row="3" Grid.Column="1"
                   x:Name="Countries"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
                   IsReadOnly="True"
                   AlternatingRowBackground="DarkCyan"
                   
