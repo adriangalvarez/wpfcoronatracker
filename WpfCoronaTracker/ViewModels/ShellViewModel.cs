@@ -23,7 +23,7 @@ namespace WpfCoronaTracker.ViewModels
         public ShellViewModel()
         {
             Countries = CountryListController.GetCountries();
-            Models.CountryDataModel.MatchData( CountryDataController.GetFullData(), Countries );
+            CountryDataModel.MatchData( CountryDataController.GetFullData(), Countries );
         }
 
         public void LoadDataForCountry()

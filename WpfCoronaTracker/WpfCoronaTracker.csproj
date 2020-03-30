@@ -83,7 +83,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Models\CountryDataModel.cs" />
     <Compile Include="ViewModels\CountryDataViewModel.cs" />
     <Compile Include="ViewModels\CountryStateTooltipControlViewModel.cs" />
     <Compile Include="Views\CountryDataView.xaml.cs">
