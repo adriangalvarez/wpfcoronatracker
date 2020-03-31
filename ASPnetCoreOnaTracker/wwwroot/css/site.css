@@ -59,8 +59,10 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background: url("https://i.pinimg.com/originals/c4/55/7d/c4557d2c083486b91b84743df45e0433.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 .footer {
   position: absolute;
@@ -68,4 +70,16 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+tr:nth-child(even) {
+    background: #CCC;
+}
+tr:nth-child(odd) {
+    background: #FFF;
+}
+th{
+    background: #1861ac;
+}
+h1{
+    color: white;
 }
