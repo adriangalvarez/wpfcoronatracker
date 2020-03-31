@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfCoronaTracker", "WpfCoronaTracker\WpfCoronaTracker.csproj", "{860622D1-F386-4084-BFB1-2B2E07E735DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BECoronaTracker", "BECoronaTracker\BECoronaTracker.csproj", "{E252DEB2-B741-4E2E-9ECB-6617F69C9DC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BECoronaTracker", "BECoronaTracker\BECoronaTracker.csproj", "{E252DEB2-B741-4E2E-9ECB-6617F69C9DC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPnetCoreOnaTracker", "ASPnetCoreOnaTracker\ASPnetCoreOnaTracker.csproj", "{CD1F12D3-DF3A-4E8F-9EA2-36BBA63AB30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E252DEB2-B741-4E2E-9ECB-6617F69C9DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E252DEB2-B741-4E2E-9ECB-6617F69C9DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E252DEB2-B741-4E2E-9ECB-6617F69C9DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1F12D3-DF3A-4E8F-9EA2-36BBA63AB30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1F12D3-DF3A-4E8F-9EA2-36BBA63AB30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1F12D3-DF3A-4E8F-9EA2-36BBA63AB30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1F12D3-DF3A-4E8F-9EA2-36BBA63AB30D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

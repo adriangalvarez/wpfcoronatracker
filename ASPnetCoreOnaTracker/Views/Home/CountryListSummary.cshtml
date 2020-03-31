@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Country>
+
+@{
+    ViewData["Title"] = "Country List Summary";
+    var data = (List<Country>) ViewData[ "Countries" ];
+}
+
+<h1>Country List Summary</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentCases)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentDeaths)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentRecovered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayOne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Population)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in data) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentCases)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentDeaths)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentRecovered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayOne)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Population)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

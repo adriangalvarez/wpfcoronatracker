@@ -7,12 +7,12 @@ namespace BECoronaTracker.Controllers
     public static class CountryDataController
     {
         /// <summary>
-        /// Property holding the complete timeline of the country.
+        /// Property holding the complete timeline of all countries.
         /// </summary>
-        public static List<EachDataModel> CountryTimeline { get; set ; }
+        internal static List<EachDataModel> CountryTimeline { get; set ; }
 
         /// <summary>
-        /// Gets the timeline for the country.
+        /// Gets the timeline for all countries.
         /// </summary>
         /// <returns></returns>
         public static List<EachDataModel> GetFullData()
@@ -23,11 +23,11 @@ namespace BECoronaTracker.Controllers
         }
 
         /// <summary>
-        /// Populates Country's States property with the data corresponding to each date,
+        /// Populates country's States property with the data corresponding to each date,
         /// removing dates before Day 1, and counting each day.
         /// </summary>
         /// <param name="country"></param>
-        public static void GetData( Country country )
+        internal static void GetData( Country country )
         {
             // Filter out dates without cases and order by date.
             var result = from day in CountryTimeline
