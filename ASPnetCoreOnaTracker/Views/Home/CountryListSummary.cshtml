@@ -38,28 +38,28 @@
 @foreach (var item in data) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor( modelItem => item.Name )
+            </td>
+            <td align="right">
+                @Html.DisplayFor( modelItem => item.CurrentCases )
+            </td>
+            <td align="right">
+                @Html.DisplayFor( modelItem => item.CurrentDeaths )
+            </td>
+            <td align="right">
+                @Html.DisplayFor( modelItem => item.CurrentRecovered )
+            </td>
+            <td align="right">
+                @Html.DisplayFor( modelItem => item.DayOne )
+            </td>
+            <td align="right">
+                @Html.DisplayFor( modelItem => item.CurrentDay )
+            </td>
+            <td align="right">
+                @Html.DisplayFor( modelItem => item.Population )
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CurrentCases)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentDeaths)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentRecovered)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DayOne)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Population)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink( "Details", "Details", new { /* id=item.PrimaryKey */ } )
             </td>
         </tr>
 }

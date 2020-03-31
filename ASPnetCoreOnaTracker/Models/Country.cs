@@ -22,6 +22,7 @@ namespace ASPnetCoreOnaTracker.Models
         /// <summary>
         /// First day with a case.
         /// </summary>
+        [DisplayFormat( DataFormatString = "{0:d}" )]
         [Display( Name = "Day 1" )]
         public DateTime DayOne { get; set; }
 
@@ -29,6 +30,7 @@ namespace ASPnetCoreOnaTracker.Models
         [Display( Name = "Day Nr" )]
         public int CurrentDay { get; set; }
 
+        [DisplayFormat( DataFormatString = "{0:n0}" )]
         public int Population { get; set; }
     }
 }
