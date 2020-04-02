@@ -23,8 +23,12 @@ namespace ASPnetCoreOnaTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services )
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            //services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
+
+            services.AddScoped<Processes.ICountryProcessor, Processes.CountryProcesses>();
+            services.AddScoped<Processes.ICountryDictionary, Processes.CountryDictionary>();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,61 @@
+﻿<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<!--Load the AJAX API-->
+@*<script type="text/javascript" src="https://www.google.com/jsapi"></script>*@
+<!--Get the latest version of jquery -->
+@*<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>*@
+
+<h1>Evolution Chart for @ViewData["countryName"]</h1>
+
+<div id="chart_div"></div>
+<div id="msg"></div>
+
+<script type="text/javascript">
+    // Load the Visualization API and the piechart package.
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var countryCode = '@ViewData[ "id" ]';
+        var options = {
+            'url': '@Url.Action("GetChartData","Chart")?countryCode=' + countryCode,
+            'type': "GET",
+            'dataType': "json",
+            'success' : processData,
+            'error': function () {
+                $("#msg").html("<h2>Error while using Google Charts!</h2 > ")
+            }
+        }
+
+        $.ajax(options);
+    }
+
+    function processData(data) {
+        var chartData = [
+            ['Day Number', 'Cases']
+        ];
+        $.each(data, function (i, item) {
+            chartData.push([ item.dayNumber, item.totalCases ]);
+        });
+        var chartDataTable = google.visualization.arrayToDataTable(chartData);
+        var chartOptions = {
+            width: 800,
+            height: 500,
+            title: "Total cases evolution since Day 1",
+            hAxis: {
+                title: 'Day Number',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Total Cases',
+                minValue: 0
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(chartDataTable, chartOptions);
+    }
+</script>

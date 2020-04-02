@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BECoronaTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace ASPnetCoreOnaTracker.Models
 {
     public class Country
     {
+        public string CountryCode { get; set; }
         public string Name { get; set; }
 
         [Display( Name = "Cases" )]
@@ -32,5 +34,7 @@ namespace ASPnetCoreOnaTracker.Models
 
         [DisplayFormat( DataFormatString = "{0:n0}" )]
         public int Population { get; set; }
+
+        public List<State> States { get; set; } = new List<State>();
     }
 }

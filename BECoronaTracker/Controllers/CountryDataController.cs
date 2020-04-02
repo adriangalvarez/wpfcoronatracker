@@ -27,7 +27,7 @@ namespace BECoronaTracker.Controllers
         /// removing dates before Day 1, and counting each day.
         /// </summary>
         /// <param name="country"></param>
-        internal static void GetData( Country country )
+        public static void GetData( Country country )
         {
             // Filter out dates without cases and order by date.
             var result = from day in CountryTimeline

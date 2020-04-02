@@ -23,7 +23,9 @@ namespace BECoronaTracker.DataAccess
             if ( AllData == null )
             {
                 var client = new RestSharp.RestClient( fullDataUrl );
-                AllData = client.Execute<AllDataModel>( new RestSharp.RestRequest( RestSharp.Method.GET ) ).Data;
+                var json = client.Execute( new RestSharp.RestRequest( RestSharp.Method.GET ) ).Content.Replace("\": \"\"", "\": \"0\"");
+                
+                AllData = Newtonsoft.Json.JsonConvert.DeserializeObject<AllDataModel>( json );
             }
             return AllData;
         }
