@@ -10,6 +10,7 @@
 
 <div id="chart_div"></div>
 <div id="msg"></div>
+<button class="btn btn-primary mt-2" onclick="history.back()">Go back to Summary</button>
 
 <script type="text/javascript">
     // Load the Visualization API and the piechart package.
@@ -43,7 +44,7 @@
         var chartDataTable = google.visualization.arrayToDataTable(chartData);
         var chartOptions = {
             width: 800,
-            height: 500,
+            height: 400,
             title: "Total cases evolution since Day 1",
             hAxis: {
                 title: 'Day Number',
