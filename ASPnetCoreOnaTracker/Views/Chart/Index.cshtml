@@ -35,13 +35,17 @@
     }
 
     function processData(data) {
-        var chartData = [
-            ['Day Number', 'Cases']
-        ];
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('number', 'Day Number');
+        dataTable.addColumn('number', 'Cases');
+        // A column for custom tooltip content
+        dataTable.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true }});
+
+        // For each row of data, you push it to the chartData object.
         $.each(data, function (i, item) {
-            chartData.push([ item.dayNumber, item.totalCases ]);
+            dataTable.addRows([[ item.dayNumber, item.totalCases, createCustomHTMLContent( item.dayNumber, item.totalCases, item.dateOfState ) ]]);
         });
-        var chartDataTable = google.visualization.arrayToDataTable(chartData);
+
         var chartOptions = {
             width: 800,
             height: 400,
@@ -77,10 +81,22 @@
             },
             legend: {
                 position: 'none'
-            }
+            },
+            // Use an HTML tooltip.
+            tooltip: { isHtml: true }
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(chartDataTable, chartOptions);
+        chart.draw(dataTable, chartOptions);
+    }
+
+    function createCustomHTMLContent(dayNumber, totalCases, date)
+    {
+        var localDate = new Date(date);
+        return '<div style="padding:5px 5px 5px 5px; width: 100px"><table><tr>' +
+            '<td><b>Date: </b>' + localDate.toLocaleDateString() + '</td></tr><tr>' +
+            '<td><b>Day Number: </b>' + dayNumber + '</td></tr><tr>' +
+            '<td><b>Total Cases: </b>' + totalCases + '</td></tr><tr>' +
+            '</tr></table></div>';
     }
 </script>
