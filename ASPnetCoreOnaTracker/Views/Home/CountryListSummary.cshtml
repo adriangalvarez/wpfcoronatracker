@@ -1,69 +1,107 @@
-﻿@model IEnumerable<Country>
+﻿@section Styles{
+    <link rel="Stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+}
+
+@model IEnumerable<Country>
 
 @{
-    ViewData["Title"] = "Country List Summary";
+    ViewData[ "Title" ] = "Country List Summary";
     var data = (List<Country>) ViewData[ "Countries" ];
 }
 
-    <div class="text-right">
-        <h1>Country List Summary</h1>
-    </div>
+<div class="text-right">
+    <h1>Country List Summary</h1>
+</div>
 
-<table class="table">
+<table id="countriesTable" class="hover compact cell-border stripe">
     <thead class="bg-primary">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor( model => model.Name )
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CurrentCases)
+                @Html.DisplayNameFor( model => model.CurrentCases )
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CurrentDeaths)
+                @Html.DisplayNameFor( model => model.CurrentDeaths )
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CurrentRecovered)
+                @Html.DisplayNameFor( model => model.CurrentRecovered )
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DayOne)
+                @Html.DisplayNameFor( model => model.DayOne )
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CurrentDay)
+                @Html.DisplayNameFor( model => model.CurrentDay )
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Population)
+                @Html.DisplayNameFor( model => model.Population )
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in data) {
-        <tr>
-            <td>
-                @Html.DisplayFor( modelItem => item.Name )
-            </td>
-            <td align="right">
-                @Html.DisplayFor( modelItem => item.CurrentCases )
-            </td>
-            <td align="right">
-                @Html.DisplayFor( modelItem => item.CurrentDeaths )
-            </td>
-            <td align="right">
-                @Html.DisplayFor( modelItem => item.CurrentRecovered )
-            </td>
-            <td align="right">
-                @Html.DisplayFor( modelItem => item.DayOne )
-            </td>
-            <td align="right">
-                @Html.DisplayFor( modelItem => item.CurrentDay )
-            </td>
-            <td align="right">
-                @Html.DisplayFor( modelItem => item.Population )
-            </td>
-            <td>
-                @Html.ActionLink( "Chart", "Index", "Chart", new { id=item.CountryCode } )
-            </td>
-        </tr>
-}
+        @foreach ( var item in data )
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor( modelItem => item.Name )
+                </td>
+                <td align="right">
+                    @Html.DisplayFor( modelItem => item.CurrentCases )
+                </td>
+                <td align="right">
+                    @Html.DisplayFor( modelItem => item.CurrentDeaths )
+                </td>
+                <td align="right">
+                    @Html.DisplayFor( modelItem => item.CurrentRecovered )
+                </td>
+                <td align="right">
+                    @Html.DisplayFor( modelItem => item.DayOne )
+                </td>
+                <td align="right">
+                    @Html.DisplayFor( modelItem => item.CurrentDay )
+                </td>
+                <td align="right">
+                    @Html.DisplayFor( modelItem => item.Population )
+                </td>
+                <td>
+                    @Html.ActionLink( "Chart", "Index", "Chart", new { id = item.CountryCode } )
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#countriesTable').DataTable(
+                {
+                    paging: false,
+                    searching: true,
+                    scrollY: "60vh",
+                    scrollCollapse: true,
+                    info: false,
+                    stateSave: true,
+                    columnDefs: [
+                        {
+                            orderable: false,
+                            targets: 4
+                        },
+                        {
+                            orderable: false,
+                            targets: 7
+                        },
+                        {
+                            orderable: false,
+                            targets: 6
+                        }
+                    ]
+                }
+            );
+        });
+    </script>
+}
