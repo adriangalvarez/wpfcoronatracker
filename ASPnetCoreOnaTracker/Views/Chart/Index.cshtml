@@ -1,11 +1,6 @@
 ﻿<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 
-<!--Load the AJAX API-->
-@*<script type="text/javascript" src="https://www.google.com/jsapi"></script>*@
-<!--Get the latest version of jquery -->
-@*<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>*@
-
 <h1>Evolution Chart for @ViewData["countryName"]</h1>
 
 <div id="chart_div"></div>
@@ -90,6 +85,7 @@
         chart.draw(dataTable, chartOptions);
     }
 
+    // Create the HTML displayed as tooltip in each day of the country chart.
     function createCustomHTMLContent(dayNumber, totalCases, date)
     {
         var localDate = new Date(date);

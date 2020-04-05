@@ -11,6 +11,9 @@ namespace ASPnetCoreOnaTracker.Controllers
 {
     public class ChartController : Controller
     {
+        /// <summary>
+        /// Injected service to get country name by code from cache.
+        /// </summary>
         private Processes.ICountryDictionary _countryDictionary;
 
         public ChartController( Processes.ICountryDictionary countryDictionary )
@@ -18,6 +21,11 @@ namespace ASPnetCoreOnaTracker.Controllers
             _countryDictionary = countryDictionary;
         }
 
+        /// <summary>
+        /// Default action, getting the country code as id parameter, by which the name will be fetched.
+        /// </summary>
+        /// <param name="id">Country code to make the chart.</param>
+        /// <returns></returns>
         public IActionResult Index(string id)
         {
             ViewData[ "id" ] = id;
@@ -25,6 +33,11 @@ namespace ASPnetCoreOnaTracker.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Function called by Google charts to get the country data.
+        /// </summary>
+        /// <param name="countryCode">Country code to get the data about.</param>
+        /// <returns>Json containing the country timeline to be drawn in the data.</returns>
         public IActionResult GetChartData( string countryCode )
         {
             var country = new BECoronaTracker.Models.Country();

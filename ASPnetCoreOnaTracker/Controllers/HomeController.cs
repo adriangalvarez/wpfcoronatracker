@@ -6,6 +6,9 @@ namespace ASPnetCoreOnaTracker.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Injected service responsible for getting the country list.
+        /// </summary>
         private Processes.ICountryProcessor _countryProcessor;
 
         public HomeController( Processes.ICountryProcessor countryProcessor )
@@ -23,6 +26,10 @@ namespace ASPnetCoreOnaTracker.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Action that shows the full list of countries with their current data.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult CountryListSummary()
         {
             ViewData[ "Countries" ] = _countryProcessor.GetCountries();

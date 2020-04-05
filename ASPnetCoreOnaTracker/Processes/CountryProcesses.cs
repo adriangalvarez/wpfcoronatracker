@@ -5,11 +5,19 @@ using System.Collections.Generic;
 
 namespace ASPnetCoreOnaTracker.Processes
 {
+    /// <summary>
+    /// Interface to be injected.
+    /// </summary>
     public interface ICountryProcessor
     {
         List<Country> GetCountries();
     }
 
+    /// <summary>
+    /// Class instantiated by the framework, so the IMemoryCache object can be injected
+    /// and the full timeline of all countries can be saved in the cache, and afterwards
+    /// got from there, only going to the server every 2 hours.
+    /// </summary>
     public class CountryProcesses : ICountryProcessor
     {
         private readonly IMemoryCache _cache;
@@ -20,12 +28,20 @@ namespace ASPnetCoreOnaTracker.Processes
             _cache = memoryCache;
         }
 
+        /// <summary>
+        /// Get full timeline of all countries.
+        /// </summary>
+        /// <returns>Full timeline of all countries.</returns>
         public List<Country> GetCountries()
         {
+            // Try to get the data from the cache, if not found, look for it in the server.
             TryGetDataFromCache();
             return countries;
         }
 
+        /// <summary>
+        /// Get full timeline from cache.  If not found, fetch from server and map to the web model.
+        /// </summary>
         private void TryGetDataFromCache()
         {
             List<Country> cacheEntry;
@@ -48,13 +64,25 @@ namespace ASPnetCoreOnaTracker.Processes
             countries = cacheEntry;
         }
 
+        /// <summary>
+        /// Fetch full timeline for all countries.
+        /// </summary>
+        /// <returns>Full timeline for all countries.</returns>
         private static List<Country> FetchDataFromServer()
         {
             countries = new List<Country>();
 
+            // Get the country list with ISO code, name and population.
             var beCountries = BECoronaTracker.Controllers.CountryListController.GetCountries();
+
+            // Get full timeline of all countries.
             var fulldata = BECoronaTracker.Controllers.CountryDataController.GetFullData();
+
+            // Match the full country list with the full timeline, filling the State property
+            // of each country with its timeline, and setting the current state.
             BECoronaTracker.Models.CountryDataModel.MatchData( fulldata, beCountries );
+
+            // Map each country returned from the BE project to the web model.
             foreach ( var beCountry in beCountries )
             {
                 var country = new Country();
