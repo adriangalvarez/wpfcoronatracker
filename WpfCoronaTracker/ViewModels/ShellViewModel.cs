@@ -7,6 +7,9 @@ namespace WpfCoronaTracker.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
+        private IEventAggregator _events;
+        private CountryDataViewModel _countryDataViewModel;
+
         private Country _selectedCountry;
 
         /// <summary>
@@ -21,15 +24,20 @@ namespace WpfCoronaTracker.ViewModels
                 _selectedCountry = value;
                 NotifyOfPropertyChange( () => SelectedCountry );
                 LoadDataForCountry();
+
+                ActivateItem( _countryDataViewModel );
             }
         }
 
-        public ShellViewModel()
+        public ShellViewModel( IEventAggregator events, CountryDataViewModel countryDataViewModel )
         {
+            _events = events;
+            _countryDataViewModel = countryDataViewModel;
+
             // Get a list of all countries.
             Countries = CountryListController.GetCountries();
 
-            // Fill data for each country.
+            // Fill current data for each country.
             CountryDataModel.MatchData( CountryDataController.GetFullData(), Countries );
         }
 
@@ -37,7 +45,7 @@ namespace WpfCoronaTracker.ViewModels
         {
             if ( SelectedCountry != null )
             {
-                ActivateItem( new CountryDataViewModel( SelectedCountry ) );
+                _events.PublishOnUIThread( SelectedCountry );
             }
         }
     }
